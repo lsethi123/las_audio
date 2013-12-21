@@ -1,0 +1,19 @@
+-str_header="Tag Details of #{@music.name}"
+%h4 
+	=str_header
+-if notice.nil?
+	-hide_class="hide"
+-else
+	-hide_class=""
+%div{:class=>"alert alert-success #{hide_class}"}
+	%p#notice=notice
+%table.table.table-bordered.table-striped
+	%tr
+		%th Name
+		%th Value
+	-@tag_data_hash.each do |k,v|
+		%tr
+			%th=k.capitalize
+			%td=v
+   
+=link_to 'Back', musics_path,:class=>"btn btn-primary"

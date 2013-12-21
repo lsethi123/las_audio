@@ -1,0 +1,19 @@
+
+#fileModal.modal.show.fade.in{:role=> "dialog"}
+    = form_for @music do |f|
+        .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+            %h5 Upload File
+        .modal-body
+            - if @music.errors.any?
+                #error_explanation.alert.alert-error
+                    %h6= "#{pluralize(@music.errors.count, "error")} prohibited this music from being saved:"
+                    %ul
+                        -@music.errors.full_messages.each do |msg|
+                            %li= msg
+            .field
+                = f.file_field :audio
+        .modal-footer
+            = f.submit 'Save',:class=>"btn btn-primary"
+            = link_to 'Back', musics_path,:class=>"btn btn-primary"
+

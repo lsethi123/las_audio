@@ -1,0 +1,31 @@
+%h4 Uploded Audio Files
+.clearfix.pull-right.new_button
+    = link_to new_music_path,{:class => 'btn btn-primary '} do
+        %i.icon-upload.icon-white
+        New Music
+%table.table.table-bordered.table-striped
+    %tr
+        %th Name
+        %th Size
+        %th Type
+        %th Uploaded Time
+        %th Play
+        %th Actions
+
+    - @musics.each do |music|
+        %tr
+            %td= music.name
+            %td= (music.size/1024).to_s.concat(' K.B.')
+            %td= music.content_type
+            %td= music.created_at
+            %td
+                %audio{controls: ""}
+                    %source{src: music.audio, type:music.content_type }
+                    %embed{height: "10", src:music.audio , width: "70"}
+            %td
+                = link_to '',music,{:class=>'icon-tags',:title=>"Show Tag",:method=>:get} 
+                = link_to '', music, :class=>"icon-trash",:method => :delete, :delete=>"Delete",:data => { :confirm => 'Are you sure?' }
+
+%br
+  
+
